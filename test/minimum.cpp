@@ -1,8 +1,12 @@
+#include <cstddef>
 #include <gtest/gtest.h>
 
+// magick_enum.hpp は基本の機能を提供する
+// ライブラリには、これ以外にも複数のヘッダが含まれる
 #include <magic_enum.hpp>
 
 enum class Color { RED = -10, GREEN = 0, BLUE = 10 };
+enum class Direction { UP, DOWN, LEFT, RIGHT };
 
 TEST(MagickEnumBasicTest, toString) {
   auto color = Color::GREEN;
@@ -45,4 +49,48 @@ TEST(MagickEnumBasicTest, fromInteger) {
   auto color_with_default =
       magic_enum::enum_cast<Color>(color_value * 2).value_or(Color::RED);
   EXPECT_TRUE(color_with_default == Color::RED);
+}
+
+TEST(MagickEnumBasicTest, toInteger) {
+  auto color = Color::BLUE;
+  auto value = magic_enum::enum_integer(color);
+  EXPECT_TRUE(value == 10);
+}
+
+TEST(MagickEnumBasicTest, fromIndex) {
+  std::size_t index = 1;
+  Color color = magic_enum::enum_value<Color>(index);
+  EXPECT_TRUE(color == Color::GREEN);
+
+  std::size_t index_maybe = 3;
+  if (index_maybe < magic_enum::enum_count<Color>()) {
+    Color color_invalid = magic_enum::enum_value<Color>(index_maybe);
+  }
+  // 異常値は assertion error が発生する (catch 不可)
+  // Color color_invalid = magic_enum::enum_value<Color>(index_invalid);
+}
+
+TEST(MagickEnumBasicTest, toIndex) {
+  auto color = Color::GREEN;
+  auto index = magic_enum::enum_index(color);
+  EXPECT_TRUE(index == 1);
+}
+
+TEST(MagickEnumBasicTest, range) {
+  constexpr std::array<Color, 3> colors = magic_enum::enum_values<Color>();
+  // colors -> {Color::RED, Color::BLUE, Color::GREEN}
+  constexpr std::array<std::basic_string_view<char>, 3> color_names =
+      magic_enum::enum_names<Color>();
+  // color_names -> {"RED", "BLUE", "GREEN"}
+  constexpr std::array<std::pair<Color, std::basic_string_view<char>>, 3>
+      color_entries = magic_enum::enum_entries<Color>();
+  // color_entries -> {{Color::RED, "RED"}, {Color::BLUE, "BLUE"},
+  // {Color::GREEN, "GREEN"}}
+  EXPECT_TRUE(colors.size() == 3 && color_names.size() == 3 &&
+              color_entries.size() == 3);
+  for (auto color : colors) {
+    auto name = magic_enum::enum_name(color);
+    auto value = magic_enum::enum_integer(color);
+    auto index = magic_enum::enum_index(color);
+  }
 }

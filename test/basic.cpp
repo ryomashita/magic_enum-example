@@ -93,13 +93,3 @@ TEST(MagickEnumBasicTest, range) {
     auto index = magic_enum::enum_index(color);
   }
 }
-
-TEST(MagickEnumBasicTest, count) {
-  Color color = Color::RED;
-  magic_enum::enum_switch(
-      [](auto val) {
-        constexpr Color c_color = val;
-        // ...
-      },
-      color);
-}

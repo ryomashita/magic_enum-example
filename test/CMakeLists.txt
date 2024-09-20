@@ -11,3 +11,9 @@ add_executable(MagickEnumFusionTest
 )
 enable_magick_enum(MagickEnumFusionTest)
 enable_gtest(MagickEnumFusionTest)
+
+add_executable(MagickEnumSwitchTest
+    switch.cpp
+)
+enable_magick_enum(MagickEnumSwitchTest)
+enable_gtest(MagickEnumSwitchTest)

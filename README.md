@@ -1,6 +1,8 @@
-# cpp-cmake-template
+# magic_enum-example
 
-## About
+The example of [magic_enum](https://github.com/Neargye/magic_enum).
+
+## About the template
 
 A template for C++ projects using CMake.
 This repository includes settings for the following tools:

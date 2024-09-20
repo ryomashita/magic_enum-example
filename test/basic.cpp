@@ -5,8 +5,7 @@
 // ライブラリには、これ以外にも複数のヘッダが含まれる
 #include <magic_enum.hpp>
 
-enum class Color { RED = -10, GREEN = 0, BLUE = 10 };
-enum class Direction { UP, DOWN, LEFT, RIGHT };
+#include "sample_enums.h"
 
 TEST(MagickEnumBasicTest, toString) {
   auto color = Color::GREEN;
@@ -93,4 +92,14 @@ TEST(MagickEnumBasicTest, range) {
     auto value = magic_enum::enum_integer(color);
     auto index = magic_enum::enum_index(color);
   }
+}
+
+TEST(MagickEnumBasicTest, count) {
+  Color color = Color::RED;
+  magic_enum::enum_switch(
+      [](auto val) {
+        constexpr Color c_color = val;
+        // ...
+      },
+      color);
 }

@@ -23,3 +23,9 @@ add_executable(MagicEnumUtilityTest
 )
 enable_magic_enum(MagicEnumUtilityTest)
 enable_gtest(MagicEnumUtilityTest)
+
+add_executable(MagicEnumFlagTest
+    flags.cpp
+)
+enable_magic_enum(MagicEnumFlagTest)
+enable_gtest(MagicEnumFlagTest)

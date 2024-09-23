@@ -1,25 +1,25 @@
 include(${CMAKE_SCRIPTS_DIR}/install_gtest.cmake)
 
-add_executable(MagickEnumBasicTest
+add_executable(MagicEnumBasicTest
     basic.cpp
 )
-enable_magick_enum(MagickEnumBasicTest)
-enable_gtest(MagickEnumBasicTest)
+enable_magic_enum(MagicEnumBasicTest)
+enable_gtest(MagicEnumBasicTest)
 
-add_executable(MagickEnumFusionTest
+add_executable(MagicEnumFusionTest
     fusion.cpp
 )
-enable_magick_enum(MagickEnumFusionTest)
-enable_gtest(MagickEnumFusionTest)
+enable_magic_enum(MagicEnumFusionTest)
+enable_gtest(MagicEnumFusionTest)
 
-add_executable(MagickEnumSwitchTest
+add_executable(MagicEnumSwitchTest
     switch.cpp
 )
-enable_magick_enum(MagickEnumSwitchTest)
-enable_gtest(MagickEnumSwitchTest)
+enable_magic_enum(MagicEnumSwitchTest)
+enable_gtest(MagicEnumSwitchTest)
 
-add_executable(MagickEnumUtilityTest
+add_executable(MagicEnumUtilityTest
     for_each.cpp
 )
-enable_magick_enum(MagickEnumUtilityTest)
-enable_gtest(MagickEnumUtilityTest)
+enable_magic_enum(MagicEnumUtilityTest)
+enable_gtest(MagicEnumUtilityTest)

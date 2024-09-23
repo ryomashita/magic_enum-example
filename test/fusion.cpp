@@ -4,7 +4,7 @@
 
 #include "sample_enums.h"
 
-TEST(MagickEnumFusionTest, CrossSwitch) {
+TEST(MagicEnumFusionTest, CrossSwitch) {
   auto color = Color::GREEN;
   auto direction = Direction::UP;
   switch (magic_enum::enum_fuse(color, direction).value()) {

@@ -1,19 +1,19 @@
 #include <cstddef>
 #include <gtest/gtest.h>
 
-// magick_enum.hpp は基本の機能を提供する
+// Magic_enum.hpp は基本の機能を提供する
 // ライブラリには、これ以外にも複数のヘッダが含まれる
 #include <magic_enum.hpp>
 
 #include "sample_enums.h"
 
-TEST(MagickEnumBasicTest, toString) {
+TEST(MagicEnumBasicTest, toString) {
   auto color = Color::GREEN;
   auto color_name = magic_enum::enum_name(color);
   EXPECT_EQ(color_name, "GREEN");
 }
 
-TEST(MagickEnumBasicTest, fromString) {
+TEST(MagicEnumBasicTest, fromString) {
   auto color_name = "BLUE";
   auto color = magic_enum::enum_cast<Color>(color_name);
   EXPECT_TRUE(color.has_value());
@@ -38,7 +38,7 @@ TEST(MagickEnumBasicTest, fromString) {
   EXPECT_TRUE(color_with_default == Color::RED);
 }
 
-TEST(MagickEnumBasicTest, fromInteger) {
+TEST(MagicEnumBasicTest, fromInteger) {
   constexpr auto color_value = 10;
   auto color = magic_enum::enum_cast<Color>(color_value);
   EXPECT_TRUE(color.has_value());
@@ -50,13 +50,13 @@ TEST(MagickEnumBasicTest, fromInteger) {
   EXPECT_TRUE(color_with_default == Color::RED);
 }
 
-TEST(MagickEnumBasicTest, toInteger) {
+TEST(MagicEnumBasicTest, toInteger) {
   auto color = Color::BLUE;
   auto value = magic_enum::enum_integer(color);
   EXPECT_TRUE(value == 10);
 }
 
-TEST(MagickEnumBasicTest, fromIndex) {
+TEST(MagicEnumBasicTest, fromIndex) {
   std::size_t index = 1;
   Color color = magic_enum::enum_value<Color>(index);
   EXPECT_TRUE(color == Color::GREEN);
@@ -69,13 +69,21 @@ TEST(MagickEnumBasicTest, fromIndex) {
   // Color color_invalid = magic_enum::enum_value<Color>(index_invalid);
 }
 
-TEST(MagickEnumBasicTest, toIndex) {
+TEST(MagicEnumBasicTest, toIndex) {
   auto color = Color::GREEN;
   auto index = magic_enum::enum_index(color);
   EXPECT_TRUE(index == 1);
 }
 
-TEST(MagickEnumBasicTest, range) {
+TEST(MagicEnumBasicTest, contains) {
+  auto color = Color::GREEN;
+  EXPECT_TRUE(magic_enum::enum_contains<Color>(color));
+  EXPECT_TRUE(magic_enum::enum_contains<Color>("RED"));
+  EXPECT_TRUE(magic_enum::enum_contains<Color>(10));
+  EXPECT_FALSE(magic_enum::enum_contains<Color>(3));
+}
+
+TEST(MagicEnumBasicTest, range) {
   constexpr std::array<Color, 3> colors = magic_enum::enum_values<Color>();
   // colors -> {Color::RED, Color::BLUE, Color::GREEN}
   constexpr std::array<std::basic_string_view<char>, 3> color_names =

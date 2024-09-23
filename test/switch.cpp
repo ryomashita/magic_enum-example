@@ -4,7 +4,7 @@
 
 #include "sample_enums.h"
 
-TEST(MagickEnumSwitchTest, ConstexprSwitch) {
+TEST(MagicEnumSwitchTest, ConstexprSwitch) {
   Color color = Color::RED;
   magic_enum::enum_switch(
       [](auto val) {

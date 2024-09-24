@@ -7,6 +7,16 @@
 
 #include "sample_enums.h"
 
+TEST(MagicEnumBasicTest, count) {
+  auto count = magic_enum::enum_count<Color>();
+  EXPECT_TRUE(count == 3);
+}
+
+TEST(MagicEnumBasicTest, typeName) {
+  auto color = Color::GREEN;
+  EXPECT_EQ(magic_enum::enum_type_name<decltype(color)>(), "Color");
+}
+
 TEST(MagicEnumBasicTest, toString) {
   auto color = Color::GREEN;
   auto color_name = magic_enum::enum_name(color);
@@ -24,6 +34,14 @@ TEST(MagicEnumBasicTest, fromString) {
       magic_enum::enum_cast<Color>("blue", magic_enum::case_insensitive);
   EXPECT_TRUE(color_insensitive.has_value());
   EXPECT_TRUE(color_insensitive.value() == Color::BLUE);
+
+  // 比較関数をラムダ式で指定する
+  auto func_case_insensitive = [](char lhs, char rhs) {
+    return std::tolower(lhs) == std::tolower(rhs);
+  };
+  EXPECT_TRUE(
+      magic_enum::enum_cast<Color>("blue", func_case_insensitive).value() ==
+      Color::BLUE);
 
   // 異常値の場合は value() で例外が発生する
   auto color_name_invalid = "INVALID";

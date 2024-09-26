@@ -17,6 +17,16 @@ TEST(MagicEnumBasicTest, typeName) {
   EXPECT_EQ(magic_enum::enum_type_name<decltype(color)>(), "Color");
 }
 
+TEST(MagicEnumBasicTest, isScoped) {
+  EXPECT_TRUE(magic_enum::is_scoped_enum<Color>::value);
+  EXPECT_FALSE(magic_enum::is_unscoped_enum<Color>::value);
+}
+
+TEST(MagicEnumBasicTest, toUnderlying) {
+  EXPECT_EQ(typeid(magic_enum::underlying_type<Color>::type),
+            typeid(std::underlying_type<Color>::type));
+}
+
 TEST(MagicEnumBasicTest, toString) {
   auto color = Color::GREEN;
   auto color_name = magic_enum::enum_name(color);

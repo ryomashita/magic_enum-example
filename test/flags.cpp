@@ -27,3 +27,11 @@ TEST(MagicEnumFlagsTest, flags) {
   // contains : 全てのbit-flagが定義済みenum要素に含まれるか判定
   EXPECT_EQ(magic_enum::enum_flags_contains<Direction>(32 + 1), false);
 }
+
+TEST(MagicEnumFlagsTest, bitwiseOp) {
+  using namespace magic_enum::bitwise_operators;
+  Direction dir_or = Direction::UP | Direction::RIGHT;
+  EXPECT_TRUE(dir_or & Direction::UP);
+  Direction dir_and = Direction::UP & Direction::RIGHT;
+  EXPECT_FALSE(dir_and & Direction::UP);
+}

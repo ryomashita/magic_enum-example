@@ -29,3 +29,15 @@ add_executable(MagicEnumFlagTest
 )
 enable_magic_enum(MagicEnumFlagTest)
 enable_gtest(MagicEnumFlagTest)
+
+add_executable(MagicEnumIostreamTest
+    iostream.cpp
+)
+enable_magic_enum(MagicEnumIostreamTest)
+enable_gtest(MagicEnumIostreamTest)
+
+add_executable(MagicEnumContainerTest
+    containers.cpp
+)
+enable_magic_enum(MagicEnumContainerTest)
+enable_gtest(MagicEnumContainerTest)

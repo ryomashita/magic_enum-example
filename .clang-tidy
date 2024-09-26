@@ -8,7 +8,8 @@ Checks: "-*,
   -modernize-use-trailing-return-type,
   performance-*,
   portability-*,
-  google-*"
+  google-*,
+  -google-build-using-namespace"
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
 FormatStyle: file
